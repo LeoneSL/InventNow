@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent" 
+    android:layout_width="fill_parent" 
+    android:layout_gravity="fill_horizontal" 
+    android:orientation="vertical">
+	<TextView  
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:text="@string/name"
+	    android:id="@+id/nameValue"
+	    />
+    
+	<LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" 
+        android:orientation="horizontal" 
+        android:layout_width="fill_parent">
+		<Button
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical|center_horizontal"
+			android:text="@string/Products"
+			android:id="@+id/Products"
+			android:clickable="true" 
+			android:layout_width="fill_parent" 
+			android:layout_weight="1">
+			</Button>
+		<Button
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical|center_horizontal"
+			android:text="@string/Scan"
+			android:id="@+id/Scan"
+			android:clickable="true" 
+			android:onClick="scanNow"
+			android:layout_width="fill_parent" 
+			android:layout_weight="1">
+			</Button>
+	</LinearLayout>
+	<Button
+	    android:id="@+id/Logout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:clickable="true"
+	    android:gravity="center_vertical|center_horizontal"
+	    android:text="@string/Logout" />
+
+</LinearLayout>
