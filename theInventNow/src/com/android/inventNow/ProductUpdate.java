@@ -35,9 +35,9 @@ public class ProductUpdate extends Activity implements OnClickListener {
     
   
 
-    private EditText mPriceEdit;
-    private EditText mTitleEdit;
-    private EditText mQuantityEdit;
+    	private EditText mPriceEdit;
+	private EditText mTitleEdit;
+    	private EditText mQuantityEdit;
 	private EditText mBarcodeEdit;
 	private Button mAddButton;
 	private Button mScanButton;
@@ -109,7 +109,7 @@ public class ProductUpdate extends Activity implements OnClickListener {
             }
         }).show();  
     }
-private void resetForm() {
+    private void resetForm() {
     // TODO Auto-generated method stub
       mBarcodeEdit.getText().clear();
       mQuantityEdit.getText().clear();
@@ -223,10 +223,10 @@ private void resetForm() {
 			try {
 				JSONObject proInfo = new JSONObject(result);            
 	            JSONObject infoData =  proInfo.getJSONObject("0");
-				String price = infoData.getString("productname");
-	            String title = infoData.getString("price");
+				String price = infoData.getString("price");
+	            		String title = infoData.getString("productname");
 	            
-	            mTitleEdit.setText("");
+	            mTitleEdit.setText(title);
 	            if (price != "0.00") {
 	            	mPriceEdit.setText(price);
 	            }
