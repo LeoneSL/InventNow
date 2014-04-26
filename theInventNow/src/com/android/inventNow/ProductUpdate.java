@@ -219,14 +219,15 @@ private void resetForm() {
         protected void onPostExecute(String result) {
             Toast.makeText(getBaseContext(), "loading!", Toast.LENGTH_LONG).show();
          
-            
+            //parse JSON object retrieve from searchupc.com 
 			try {
 				JSONObject proInfo = new JSONObject(result);            
 	            JSONObject infoData =  proInfo.getJSONObject("0");
-				String title = infoData.getString("productname");
-	            String price = infoData.getString("price");
+	            String title = infoData.getString("productname");
+				String price = infoData.getString("price");
 	            
-	            mTitleEdit.setText("");
+	            
+	            mTitleEdit.setText(title);
 	            if (price != "0.00") {
 	            	mPriceEdit.setText(price);
 	            }

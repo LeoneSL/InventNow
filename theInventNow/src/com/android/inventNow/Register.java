@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,11 +17,14 @@ import android.widget.Toast;
 
 import com.android.database.DatabaseAdapter;
 
+
+
 /**
  * Handles the user registration activity.
  * @author Gil
  */
 public class Register extends Activity {
+	private Mail m;
 	private EditText newUsername;
 	private EditText newPassword;
 	private EditText newConfiPass;
@@ -34,6 +38,7 @@ public class Register extends Activity {
 	 @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 
         SharedPreferences settings = getSharedPreferences(login.MY_PREFS, 0);
         Editor editor = settings.edit();
@@ -99,6 +104,8 @@ public class Register extends Activity {
 	 @SuppressWarnings("deprecation")
 	private void RegisterMe(View v)
 	    {
+		 		 	
+		 	
 		 	//Get user details. 
 	    	String username = newUsername.getText().toString();
 	    	String password = newPassword.getText().toString();
@@ -169,7 +176,50 @@ public class Register extends Activity {
 	    			          Toast.LENGTH_SHORT).show();
 	    			saveLoggedInUId(id, username, newPassword.getText().toString(),newEmail.getText().toString());
 	    			Intent i = new Intent(v.getContext(),Helloworld.class);	    	        
-	    	        startActivity(i);	    			
+	    	        
+	    			
+	    			
+	    			startActivity(i);	
+	    			
+	    			//get user info for email
+	    		 	final String eUsername = newUsername.getText().toString();
+	    		 	final String ePassword = newPassword.getText().toString();
+	    		 	final String eEmail = newEmail.getText().toString();
+	    			final String body ="Thank you, "+eUsername
+	    					+", for your registering with InventNow!\n"
+	    					+"Please view your info below.\n\n"
+	    					+"\n\n"
+	    					+"Username: "+eUsername+"\n"
+	    					+"Email registered with InventNow: "+eEmail+"\n"
+	    					+"Password created with InventNow: "+ePassword+"\n"
+	    					+"\n"
+	    					+"Once again welcome to the new exciting age of Inventory!!!\n"
+	    					+"Your registeration with Invent Now is greatly appreciated!\n\n"
+	    					+"Sincerely,\n\n"
+	    					+"The InventNow Team";
+	    	        /*place email activity into this position */
+	    			new Thread(){ 
+	    				
+	    				
+	                	public void run(){ 
+	                	    try {  
+	                	    		
+	                	    
+	                	    	
+	                	    Sender sender = new Sender("inventnow.app@gmail.com", "inventnow");
+	                            sender.sendMail("Thank you for registering with InventNow",   
+	                                    body,   
+	                                    "inventNow.app@gmail.com",   
+	                                    eEmail);
+	                          
+	                        } catch (Exception e) {   
+	                            Log.e("SendMail error", e.getMessage(), e);   
+	                        } 
+	                	}
+	                    }.start();
+	    	        
+	    	        
+	    	    
 	    			
 
 		    		finish();
