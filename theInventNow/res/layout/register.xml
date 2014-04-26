@@ -75,6 +75,22 @@
 		</EditText>
 	</LinearLayout>
 	<LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+		<EditText
+			android:layout_height="wrap_content"
+			android:gravity="left"
+			android:selectAllOnFocus="true"
+			android:lines="1"
+			android:id="@+id/nConfiEmail"
+			android:hint="Please confirm your email address" 
+			android:inputType="textEmailAddress" 
+			android:layout_gravity="fill_horizontal" 
+			android:layout_width="match_parent">
+		</EditText>
+	</LinearLayout>
+	<LinearLayout
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal" 
         android:orientation="horizontal" 

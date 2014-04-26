@@ -24,10 +24,10 @@ import com.android.database.DatabaseAdapter;
  * @author Gil
  */
 public class Register extends Activity {
-	private Mail m;
 	private EditText newUsername;
 	private EditText newPassword;
 	private EditText newConfiPass;
+	private EditText newConfiEmail;
 	private EditText newEmail;
 	private Button registerButton;
 	private Button clearButton;
@@ -60,6 +60,7 @@ public class Register extends Activity {
 		 	newPassword = (EditText) findViewById(R.id.nPassword);
 		 	newConfiPass = (EditText) findViewById(R.id.nConfiPass);
 		 	newEmail = (EditText) findViewById(R.id.nEmail);
+		 	newConfiEmail =(EditText) findViewById(R.id.nConfiEmail);
 		 	registerButton = (Button) findViewById(R.id.nRegister);
 		 	clearButton = (Button) findViewById(R.id.nClear);
 		 	backButton = (Button) findViewById(R.id.nBack);
@@ -111,6 +112,7 @@ public class Register extends Activity {
 	    	String password = newPassword.getText().toString();
 	    	String confirmpassword = newConfiPass.getText().toString();
 	    	String email = newEmail.getText().toString();
+	    	String confirmemail = newConfiEmail.getText().toString();
 
 	    	//Check if all fields have been completed.
 	    	if (username.equals("") || password.equals("") || email.equals("")){
@@ -127,6 +129,18 @@ public class Register extends Activity {
 				          	Toast.LENGTH_SHORT).show();
 	    					newPassword.setText("");
 	    					newConfiPass.setText("");
+	    		return;
+	    	}
+	    	
+	    	//Check email match. 
+	    	if (!email.equals(confirmemail)) {
+	    		Toast.makeText(getApplicationContext(), 
+	    				"The email does not match.",
+				          	Toast.LENGTH_SHORT).show();
+	    					newPassword.setText("");
+	    					newConfiPass.setText("");
+	    					newEmail.setText("");
+	    					newConfiEmail.setText("");
 	    		return;
 	    	}
 
