@@ -223,8 +223,8 @@ private void resetForm() {
 			try {
 				JSONObject proInfo = new JSONObject(result);            
 	            JSONObject infoData =  proInfo.getJSONObject("0");
-				String price = infoData.getString("productname");
-	            String title = infoData.getString("price");
+				String title = infoData.getString("productname");
+	            String price = infoData.getString("price");
 	            
 	            mTitleEdit.setText("");
 	            if (price != "0.00") {
