@@ -69,9 +69,5 @@
         
     </TableRow>
     <TableRow android:layout_marginTop="18dip">
-        <Button android:text="Remove Product" 
-           android:id="@+id/removeButton"
-           android:layout_span="2"
-           android:textSize="20sp" />
     </TableRow>
 </TableLayout>

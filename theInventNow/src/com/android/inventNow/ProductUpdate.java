@@ -1,10 +1,11 @@
 package com.android.inventNow;
 
+import com.android.products.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
+//import java.math.BigDecimal;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -13,7 +14,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.android.database.DatabaseAdapter;
+//import com.android.database.DatabaseAdapter;
 import com.android.database.ProductAdapter;
 
 import android.app.Activity;
@@ -33,15 +34,15 @@ import android.widget.Toast;
 
 public class ProductUpdate extends Activity implements OnClickListener {
     
-  
-
+	//products database
+	private ItemsDataSource database;
     private EditText mPriceEdit;
     private EditText mTitleEdit;
     private EditText mQuantityEdit;
 	private EditText mBarcodeEdit;
 	private Button mAddButton;
 	private Button mScanButton;
-	private Button mClearButton;
+	//private Button mClearButton;
 	private ProductAdapter pdHelper;
 	
 
@@ -60,6 +61,8 @@ public class ProductUpdate extends Activity implements OnClickListener {
         mAddButton.setOnClickListener(this);
         pdHelper = new ProductAdapter(this);
         pdHelper.open();
+        database = new ItemsDataSource(this);
+        database.open();
     }
     /**
      * Allows user to scan barcode  
@@ -72,7 +75,7 @@ public class ProductUpdate extends Activity implements OnClickListener {
         	intent.putExtra("SCAN_MODE", "SCAN_MODE"); 
         	startActivityForResult(intent, 0);
         	
-        	Log.d("test", "button works!"); 
+        	//Log.d("test", "button works!"); 
         	
         case R.id.addButton:
             String barcode = mBarcodeEdit.getText().toString();
@@ -84,11 +87,30 @@ public class ProductUpdate extends Activity implements OnClickListener {
             if (errors.length() > 0) {
                 showInfoDialog(this, "Please 'Type In' these fields", errors);
             } else {
-               //place create 
-
-          // insert barcode quantity title price
-                showInfoDialog(this, "Success", "Product saved successfully");
-                resetForm();
+                //check if item exists already and add it if it doesn't
+            	boolean doesExist = database.doesItemExistAlready(barcode);
+            	Log.d("Item is: ", barcode);
+            	Log.d("Item is: ", String.valueOf(doesExist));
+            	if(doesExist == false){
+            		Item item = new Item();
+            		item.setUPC(barcode);
+            		item.setName(title);
+            		item.setAmount(Integer.parseInt(quantity));
+            		item.setDescription(price);
+            		database.addItem(item);
+            		
+            		//added sucessfully!
+                    showInfoDialog(this, "Success", "Product saved successfully");
+                    resetForm();
+            	}
+            	else if(doesExist == true){
+            		Item item = database.getSingleItem(barcode);
+            		item.setAmount(item.getAmount() + Integer.parseInt(quantity));
+            		//item.setDelFlag(0);
+            		database.updateItem(item);
+            		showInfoDialog(this, "Item Exists", "Adding " + quantity + "to the Product");
+            		resetForm();
+            	}
             }	
         	
         	
@@ -117,10 +139,6 @@ private void resetForm() {
       mPriceEdit.getText().clear();
 }
     
-    
-   
-    	
-
     public void onActivityResult(int requestCode, int resultCode, Intent intent){ 
     	if(requestCode == 0)     { 
     		if(resultCode == RESULT_OK)         {       
@@ -219,18 +237,19 @@ private void resetForm() {
         protected void onPostExecute(String result) {
             Toast.makeText(getBaseContext(), "loading!", Toast.LENGTH_LONG).show();
          
-            //parse JSON object retrieve from searchupc.com 
+            
 			try {
 				JSONObject proInfo = new JSONObject(result);            
 	            JSONObject infoData =  proInfo.getJSONObject("0");
-	            String title = infoData.getString("productname");
-				String price = infoData.getString("price");
+				String title = infoData.getString("productname");
+	            String price = infoData.getString("price");
 	            
-	            
+	            String amount = "1";
 	            mTitleEdit.setText(title);
 	            if (price != "0.00") {
 	            	mPriceEdit.setText(price);
 	            }
+	            mQuantityEdit.setText(amount);
 			} catch (JSONException e) {
 				  Toast.makeText(getBaseContext(), "no product info found, please enter in manually!", Toast.LENGTH_LONG).show();
 				e.printStackTrace();

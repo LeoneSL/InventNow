@@ -134,4 +134,23 @@
 	<string name="wifi_changing_network">Requesting connection to network\u2026</string>
 	<string name="wifi_ssid_label">Network Name</string>
 	<string name="wifi_type_label">Type</string>
+		<string name="productName">productName</string>
+	<string name="productAmount">productAmount</string>
+	<string name="productPrice">productPrice</string>
+	<string name="productUPC">UPC</string>
+	<string name="deleteText">Delete All Items</string>
+	<string name="deleteButton">Delete</string>
+	<string name="about">About: [insert informative text here]</string>
+	<string name="setNotifications">Set Day For Email</string>
+	<string name="productDetailName">productDetailName</string>
+	<string name="productDetailAmount">productDetailAmount</string>
+	<string name="productDetailDesc">productDetailDesc</string>
+	<string name="productDetailUPC">productDetailUPC</string>
+	<string name="buttonplus">Plus</string>
+	<string name="buttonminus">Minus</string>
+	<string name="buttonconfirm">Update</string>
+	<string name="buttonlist">MyList</string>
+	<string name="MyList">My Shopping List</string>
+	<string name="emailButton">Email Me This List</string>
+	<string name="refresh">Refresh List</string>
 </resources>

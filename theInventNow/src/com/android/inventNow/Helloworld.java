@@ -31,6 +31,7 @@ public class Helloworld extends Activity {
 	private Button inventNowButton;
 	private Button settingsButton;
 	private Button productsButton;
+	private Button myListButton;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,12 +44,7 @@ public class Helloworld extends Activity {
         
         dbHelper = new DatabaseAdapter(this);
         dbHelper.open();
-        
-       
-          
-        
-        
-        
+
         setContentView(R.layout.hello);
         initControls();
     }
@@ -69,9 +65,29 @@ public class Helloworld extends Activity {
 		inventNowButton = (Button) findViewById(R.id.inventNow);
 		settingsButton = (Button) findViewById(R.id.hSettings);
 		productsButton = (Button) findViewById(R.id.Products);
+		myListButton = (Button) findViewById(R.id.buttonlist);
+		
+		productsButton.setOnClickListener(new Button.OnClickListener(){
+			public void onClick(View v){
+				Intent products = new Intent(Helloworld.this, ProductList.class);
+				startActivity(products);
+			}
+		});
+		
+		settingsButton.setOnClickListener(new Button.OnClickListener(){
+			public void onClick(View v){
+				Intent settings = new Intent(Helloworld.this, SettingsPage.class);
+				startActivity(settings);
+			}
+		});
 		
 		
-		
+		myListButton.setOnClickListener(new Button.OnClickListener(){
+			public void onClick(View v){
+				Intent list = new Intent(Helloworld.this, MyList.class);
+				startActivity(list);
+			}
+		});
 		
 		logoutButton.setOnClickListener(new Button.OnClickListener(){
     		public void onClick (View v){
@@ -85,22 +101,20 @@ public class Helloworld extends Activity {
 	    
 		inventNowButton.setOnClickListener(new Button.OnClickListener(){
     		public void onClick (View v){
-    			Intent i = new Intent(Helloworld.this, ProductUpdate.class);
-    	    	startActivity(i);
+    			Intent inventNow = new Intent(Helloworld.this, ProductUpdate.class);
+    	    	startActivity(inventNow);
     		}
     	});
-		
-		
+		/*\
+		 * Sends user to product listview ui and search capabilities
+		 */
 		
 		//display user name in Hello, Welcome 'user' 
     	SharedPreferences prefs = getSharedPreferences(MY_PREFS, 0);
     	String thisUsername = prefs.getString("username", "");
     	displayname.setText(thisUsername);
-    	
-    		
 		
 	}
-	
 	
 	 /**
      * Deals with Exit option - exits the application.

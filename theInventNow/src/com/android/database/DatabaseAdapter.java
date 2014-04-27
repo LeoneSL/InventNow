@@ -113,9 +113,11 @@ public class DatabaseAdapter {
 	 * 
 	 * @return
 	 */
-	public Cursor fetchUserEmail(String email) {
+	public Cursor fetchUserEmail(String username, String password, String email) {
 		Cursor myCursor = database.query(LOGIN_TABLE, 
-				new String[] { COL_ID, COL_USERNAME, COL_PASSWORD, COL_EMAIL },  
+				new String[] { COL_ID, COL_USERNAME, COL_PASSWORD, COL_EMAIL }, 
+				COL_USERNAME + "='" + username + "' AND " + 
+				COL_PASSWORD + "='" + password + "' AND " + 
 				COL_EMAIL + "='" + email + "'", null, null, null, null);
 
 		if (myCursor != null) {
