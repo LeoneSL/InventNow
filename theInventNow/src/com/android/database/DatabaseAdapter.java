@@ -98,7 +98,7 @@ public class DatabaseAdapter {
 	 */
 	public Cursor fetchUser(String username, String password) {
 		Cursor myCursor = database.query(LOGIN_TABLE, 
-				new String[] { COL_ID, COL_USERNAME, COL_PASSWORD }, 
+				new String[] { COL_ID, COL_USERNAME, COL_PASSWORD, COL_EMAIL }, 
 				COL_USERNAME + "='" + username + "' AND " + 
 				COL_PASSWORD + "='" + password + "'", null, null, null, null);
 
@@ -109,16 +109,14 @@ public class DatabaseAdapter {
 	}
 	
 	/**
-	 * Retrieves the details of a specific user, given a username, password and email .
+	 * Retrieves the details of a specific user, given a username .
 	 * 
 	 * @return
 	 */
-	public Cursor fetchUserEmail(String username, String password, String email) {
+	public Cursor fetchUserEmail(String username) {
 		Cursor myCursor = database.query(LOGIN_TABLE, 
-				new String[] { COL_ID, COL_USERNAME, COL_PASSWORD, COL_EMAIL }, 
-				COL_USERNAME + "='" + username + "' AND " + 
-				COL_PASSWORD + "='" + password + "' AND " + 
-				COL_EMAIL + "='" + email + "'", null, null, null, null);
+				new String[] { COL_EMAIL }, 
+				COL_USERNAME + "='" + username + "'", null, null, null, null);
 
 		if (myCursor != null) {
 			myCursor.moveToFirst();
