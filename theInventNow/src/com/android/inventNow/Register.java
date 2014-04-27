@@ -132,6 +132,17 @@ public class Register extends Activity {
 	    		return;
 	    	}
 	    	
+	    	//checks to see if email is valid format user@emailprovider.com
+	    	if (isEmailValid(email) == false) {
+	    		
+	    		Toast.makeText(getApplicationContext(), 
+	    				"Please type in a valid email address.",
+				          	Toast.LENGTH_SHORT).show();
+				    		newEmail.setText("");
+							newConfiEmail.setText("");
+	    		return;
+	    	}
+	    	
 	    	//Check email match. 
 	    	if (!email.equals(confirmemail)) {
 	    		Toast.makeText(getApplicationContext(), 
@@ -183,6 +194,25 @@ public class Register extends Activity {
 	        		stopManagingCursor(user);
 	        		user.close();
 	        	}
+	    	}
+	        	user = dbHelper.fetchUserEmail(email);
+	        	if (user == null) {
+	        		Toast.makeText(getApplicationContext(), "Database query error",
+	  			          Toast.LENGTH_SHORT).show();
+	        		return;
+	        	} else {
+	        		startManagingCursor(user);
+
+	        		if (user.getCount() > 0) {
+	        			Toast.makeText(getApplicationContext(), "That email is already registered with a user",
+	        			          Toast.LENGTH_SHORT).show();
+	        			stopManagingCursor(user);
+	            		user.close();
+	        			return;
+	        		}
+	        		stopManagingCursor(user);
+	        		user.close();
+	        	
 	        	//Create the new username.
 	    		long id = dbHelper.createUser(username, password, email);
 	    		if (id > 0) {
@@ -219,7 +249,7 @@ public class Register extends Activity {
 	                	    try {  
 	                	    		
 	                	    
-	                	    	
+	                	   //sends email to newly registered user 	
 	                	    Sender sender = new Sender("inventnow.app@gmail.com", "inventnow");
 	                            sender.sendMail("Thank you for registering with InventNow",   
 	                                    body,   
@@ -275,4 +305,13 @@ public class Register extends Activity {
 	        return s;
 	    }
 	}
+	
+	/**
+	  * email validator function
+	  * @param email
+	  * return
+	  */
+	boolean isEmailValid(CharSequence email) {
+		   return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+		}
 }
