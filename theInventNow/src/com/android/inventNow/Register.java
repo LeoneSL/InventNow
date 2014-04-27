@@ -115,7 +115,7 @@ public class Register extends Activity {
 	    	String confirmemail = newConfiEmail.getText().toString();
 
 	    	//Check if all fields have been completed.
-	    	if (username.equals("") || password.equals("") || email.equals("")){
+	    	if (username.equals("") || password.equals("") || email.equals("") || confirmemail.equals("")){
 	    		Toast.makeText(getApplicationContext(), 
 	    				"Please ensure all fields have been completed.",
 				          Toast.LENGTH_SHORT).show();
