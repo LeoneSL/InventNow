@@ -74,6 +74,7 @@ public class ProductUpdate extends Activity implements OnClickListener {
         	Intent intent = new Intent("com.google.zxing.client.android.SCAN"); 
         	intent.putExtra("SCAN_MODE", "SCAN_MODE"); 
         	startActivityForResult(intent, 0);
+        	break;
         	
         	//Log.d("test", "button works!"); 
         	
@@ -108,7 +109,7 @@ public class ProductUpdate extends Activity implements OnClickListener {
             		item.setAmount(item.getAmount() + Integer.parseInt(quantity));
             		//item.setDelFlag(0);
             		database.updateItem(item);
-            		showInfoDialog(this, "Item Exists", "Adding " + quantity + "to the Product");
+            		showInfoDialog(this, "Item Exists", "Adding " + quantity + " to the Product");
             		resetForm();
             	}
             }	
@@ -235,7 +236,7 @@ private void resetForm() {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), "loading!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Retrieving Product Info!", Toast.LENGTH_LONG).show();
          
             
 			try {

@@ -109,7 +109,7 @@ public class DatabaseAdapter {
 	}
 	
 	/**
-	 * Retrieves the details of a specific user, given a username .
+	 * Retrieves the email of a specific user, given a username .
 	 * 
 	 * @return
 	 */
@@ -117,6 +117,22 @@ public class DatabaseAdapter {
 		Cursor myCursor = database.query(LOGIN_TABLE, 
 				new String[] { COL_EMAIL }, 
 				COL_USERNAME + "='" + username + "'", null, null, null, null);
+
+		if (myCursor != null) {
+			myCursor.moveToFirst();
+		}
+		return myCursor;
+	}
+	
+	/**
+	 * Retrieves the detailts of user if email, given a email .
+	 * 
+	 * @return
+	 */
+	public Cursor fetchEmail(String email) {
+		Cursor myCursor = database.query(LOGIN_TABLE, 
+				new String[] { COL_EMAIL }, 
+				COL_EMAIL + "='" + email + "'", null, null, null, null);
 
 		if (myCursor != null) {
 			myCursor.moveToFirst();

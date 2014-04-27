@@ -14,6 +14,7 @@
     <string name="Settings">Settings</string>
     <string name="about_text">
    	Please Write the about me for this app</string>
+   	<string name="aboutapp">About</string>
     <string name="Scan">Scan</string>
     <string name="Logout">LogOut</string>
     <string name="name">Hello!, Welcome </string>
@@ -140,7 +141,7 @@
 	<string name="productUPC">UPC</string>
 	<string name="deleteText">Delete All Items</string>
 	<string name="deleteButton">Delete</string>
-	<string name="about">About: [insert informative text here]</string>
+	<string name="about">About:</string>
 	<string name="setNotifications">Set Day For Email</string>
 	<string name="productDetailName">productDetailName</string>
 	<string name="productDetailAmount">productDetailAmount</string>

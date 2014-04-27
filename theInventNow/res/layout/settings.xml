@@ -23,15 +23,9 @@
         android:text="@string/deleteText"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="200dp"
-        android:text="@string/about"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    
+  
 
     <TextView
         android:id="@+id/textView3"
@@ -42,5 +36,15 @@
         android:layout_marginTop="30dp"
         android:text="@string/setNotifications"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/about_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="108dp"
+        android:layout_marginRight="78dp"
+        android:layout_toLeftOf="@+id/del_button"
+        android:text="@string/aboutapp" />
 
 </RelativeLayout>

@@ -183,6 +183,26 @@ public class Register extends Activity {
 	        		stopManagingCursor(user);
 	        		user.close();
 	        	}
+	        	
+	        	user = dbHelper.fetchEmail(email);
+	        	if (user == null) {
+	        		Toast.makeText(getApplicationContext(), "Database query error",
+	  			          Toast.LENGTH_SHORT).show();
+	        		return;
+	        	} else {
+	        		startManagingCursor(user);
+
+	        		if (user.getCount() > 0) {
+	        			Toast.makeText(getApplicationContext(), "The email is already registered to a user",
+	        			          Toast.LENGTH_SHORT).show();
+	        			stopManagingCursor(user);
+	            		user.close();
+	        			return;
+	        		}
+	        		stopManagingCursor(user);
+	        		user.close();
+	        	}
+	        	
 	        	//Create the new username.
 	    		long id = dbHelper.createUser(username, password, email);
 	    		if (id > 0) {
